@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@theme {
+  /* === Colors: Digital Obsidian === */
+  --color-surface: #0b1326;
+  --color-surface-dim: #0b1326;
+  --color-surface-bright: #31394d;
+  --color-surface-container-lowest: #060e20;
+  --color-surface-container-low: #131b2e;
+  --color-surface-container: #171f33;
+  --color-surface-container-high: #222a3d;
+  --color-surface-container-highest: #2d3449;
+  --color-surface-variant: #2d3449;
+
+  --color-on-surface: #dae2fd;
+  --color-on-surface-variant: #c7c4d7;
+  --color-on-background: #dae2fd;
+
+  --color-primary: #c0c1ff;
+  --color-primary-fixed: #e1e0ff;
+  --color-primary-fixed-dim: #c0c1ff;
+  --color-primary-container: #8083ff;
+  --color-on-primary: #1000a9;
+  --color-on-primary-fixed: #07006c;
+  --color-on-primary-container: #0d0096;
+  --color-on-primary-fixed-variant: #2f2ebe;
+  --color-inverse-primary: #494bd6;
+
+  --color-secondary: #ddb7ff;
+  --color-secondary-fixed: #f0dbff;
+  --color-secondary-fixed-dim: #ddb7ff;
+  --color-secondary-container: #6f00be;
+  --color-on-secondary: #490080;
+  --color-on-secondary-fixed: #2c0051;
+  --color-on-secondary-fixed-variant: #6900b3;
+  --color-on-secondary-container: #d6a9ff;
+
+  --color-tertiary: #ffb783;
+  --color-tertiary-fixed: #ffdcc5;
+  --color-tertiary-fixed-dim: #ffb783;
+  --color-tertiary-container: #d97721;
+  --color-on-tertiary: #4f2500;
+  --color-on-tertiary-fixed: #301400;
+  --color-on-tertiary-fixed-variant: #703700;
+  --color-on-tertiary-container: #452000;
+
+  --color-outline: #908fa0;
+  --color-outline-variant: #464554;
+
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+  --color-on-error: #690005;
+  --color-on-error-container: #ffdad6;
+
+  --color-inverse-surface: #dae2fd;
+  --color-inverse-on-surface: #283044;
+  --color-surface-tint: #c0c1ff;
+  --color-background: #0b1326;
+
+  /* === Typography === */
+  --font-headline: "Manrope", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Inter", sans-serif;
+
+  /* === Border Radius === */
+  --radius: 1rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+  --radius-full: 9999px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0b1326;
+  color: #dae2fd;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: #c0c1ff;
+  color: #07006c;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #c0c1ff, #ddb7ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-card {
+  background: rgba(45, 52, 73, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(70, 69, 84, 0.2);
+}
+
+.glow-hover {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.glow-hover:hover {
+  box-shadow: 0 0 40px rgba(192, 193, 255, 0.15);
+  transform: translateY(-8px);
+}
