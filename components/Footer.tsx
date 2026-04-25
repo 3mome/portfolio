@@ -1,12 +1,12 @@
 "use client";
 import { useLang } from "./LangProvider";
-import { Linkedin, Github, Twitter, Instagram } from "lucide-react";
+import { Linkedin, Github, Twitter, Instagram, Dribbble } from "lucide-react";
 
 const socialLinks = [
   { label: "LinkedIn", href: "#", Icon: Linkedin },
   { label: "GitHub", href: "#", Icon: Github },
   { label: "Twitter", href: "#", Icon: Twitter },
-  { label: "Dribbble", href: "#", Icon: Instagram },
+  { label: "Dribbble", href: "#", Icon: Dribbble },
 ];
 
 export default function Footer() {
