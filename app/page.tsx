@@ -179,7 +179,7 @@ export default function HomePage() {
                   { label: "SAP Integration", icon: Link2 },
                   { label: "OPC/Kepware", icon: Activity },
                   { label: "REST API", icon: Route },
-                  { label: "Middleware", icon: Server },
+                  { label: "Middleware", icon: Database },
                 ],
               },
               {
@@ -201,7 +201,7 @@ export default function HomePage() {
                   { label: "CI/CD", icon: GitBranch },
                   { label: "JWT/RBAC", icon: Shield },
                   { label: "Load Testing", icon: Gauge },
-                  { label: "SLA Support", icon: Shield },
+                  { label: "SLA Support", icon: Radio },
                 ],
               },
             ].map(({ title, icon: Icon, color, tags }) => (
@@ -343,6 +343,16 @@ export default function HomePage() {
                 <p className="text-xs font-mono" style={{ color: "var(--color-outline)" }}>
                   {h.project2_stack}
                 </p>
+                <div className="pt-4">
+                  <a
+                    href="/projects"
+                    className="font-bold flex items-center gap-2 transition-opacity hover:opacity-80"
+                    style={{ color: "var(--color-secondary)", fontFamily: "var(--font-manrope)" }}
+                  >
+                    {h.project3_link}
+                    <ExternalLink size={16} />
+                  </a>
+                </div>
               </div>
             </div>
 
