@@ -20,8 +20,6 @@ export default function HomePage() {
   const h = t.home;
 
   const skills = useReveal();
-  const works = useReveal();
-  const cards = useReveal();
 
   return (
     <>
@@ -267,119 +265,42 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Key Deliveries */}
+      {/* Infographic */}
       <section
-        ref={works.ref}
         className="py-32 relative"
         style={{ backgroundColor: "var(--color-background)" }}
       >
         <div className="max-w-7xl mx-auto px-8">
           {/* Section header */}
-          <div className={`flex justify-between items-end mb-12 reveal ${works.visible ? "visible" : ""}`}>
-            <div>
-              <h2
-                className="text-4xl md:text-5xl font-extrabold tracking-tighter mb-3"
-                style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
-              >
-                {h.works_title}
-              </h2>
-              <p style={{ color: "var(--color-on-surface-variant)", maxWidth: "32rem" }}>
-                {h.works_subtitle}
-              </p>
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="h-px w-10" style={{ backgroundColor: "var(--color-primary)" }} />
+              <span className="text-xs font-bold uppercase tracking-[0.2em]"
+                style={{ color: "var(--color-primary)", fontFamily: "var(--font-kanit)" }}>
+                Overview
+              </span>
             </div>
-            <a
-              href="/projects"
-              className="hidden md:flex items-center gap-2 font-bold uppercase tracking-widest text-sm transition-all duration-200 hover:gap-4 shrink-0"
-              style={{ color: "var(--color-primary)", fontFamily: "var(--font-kanit)" }}
+            <h2
+              className="text-4xl md:text-5xl font-extrabold tracking-tighter"
+              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
             >
-              {h.works_archive}
-            </a>
+              Infographic Summary
+            </h2>
+            <p style={{ color: "var(--color-on-surface-variant)", maxWidth: "32rem", marginTop: "0.5rem" }}>
+              {h.works_subtitle}
+            </p>
           </div>
 
-          {/* 11-system grid */}
-          <div
-            ref={cards.ref}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
-          >
-            {t.projects.systems.map((sys, i) => (
-              <a
-                key={sys.title}
-                href="/projects"
-                className={`group rounded-2xl overflow-hidden flex flex-col card-hover reveal ${
-                  cards.visible ? "visible" : ""
-                }`}
-                style={{
-                  backgroundColor: "var(--color-surface-container-low)",
-                  border: "1px solid var(--border-subtle)",
-                  transitionDelay: `${(i % 4) * 70}ms`,
-                  textDecoration: "none",
-                }}
-              >
-                {/* Image */}
-                <div className="relative h-44 overflow-hidden">
-                  <Image
-                    src={sys.image}
-                    alt={sys.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    unoptimized
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "linear-gradient(to top, var(--color-surface-container-low) 0%, rgba(11,19,38,0.2) 70%, transparent 100%)",
-                    }}
-                  />
-                  <span
-                    className="absolute top-3 left-3 text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full backdrop-blur-sm"
-                    style={{
-                      backgroundColor: "rgba(11,19,38,0.65)",
-                      color: "var(--color-primary)",
-                      border: "1px solid rgba(192,193,255,0.2)",
-                    }}
-                  >
-                    {sys.category}
-                  </span>
-                </div>
-
-                {/* Content */}
-                <div className="px-5 py-4 flex flex-col flex-grow">
-                  <h3
-                    className="text-base font-bold mb-2 leading-snug"
-                    style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
-                  >
-                    {sys.title}
-                  </h3>
-                  <div className="flex flex-wrap gap-1 mt-auto pt-3">
-                    {sys.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[9px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full"
-                        style={{
-                          backgroundColor: "var(--color-surface-container-highest)",
-                          color: "var(--color-primary)",
-                          border: "1px solid var(--border-subtle)",
-                          fontFamily: "var(--font-kanit)",
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-
-          <div className="mt-8 flex md:hidden justify-center">
-            <a
-              href="/projects"
-              className="font-bold uppercase tracking-widest text-sm"
-              style={{ color: "var(--color-primary)", fontFamily: "var(--font-kanit)" }}
-            >
-              {h.works_archive}
-            </a>
+          {/* Infographic image */}
+          <div className="rounded-3xl overflow-hidden relative">
+            <Image
+              src="/infographic.png"
+              alt="Infographic"
+              width={1200}
+              height={800}
+              className="w-full h-auto"
+              unoptimized
+            />
           </div>
         </div>
       </section>
