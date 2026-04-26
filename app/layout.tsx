@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import { Manrope, Inter } from "next/font/google";
+import { Kanit } from "next/font/google";
 import "./globals.css";
+import ThemeProvider from "@/components/ThemeProvider";
+import LangProvider from "@/components/LangProvider";
 
-const manrope = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin"],
-  weight: ["200", "400", "700", "800"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+const kanit = Kanit({
+  variable: "--font-kanit",
+  subsets: ["latin", "thai"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -25,9 +21,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${manrope.variable} ${inter.variable} min-h-full`}>
-        {children}
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        {/* Prevent flash of wrong theme on load */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.className=t;})()`,
+          }}
+        />
+      </head>
+      <body className={`${kanit.variable} min-h-full`}>
+        <LangProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </LangProvider>
       </body>
     </html>
   );

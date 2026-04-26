@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLang } from "@/components/LangProvider";
@@ -9,13 +10,6 @@ import {
   GraduationCap,
   Award,
   Languages as LanguagesIcon,
-  Hexagon,
-  Circle,
-  Code2,
-  Smartphone,
-  Database,
-  Link2,
-  ShieldCheck,
 } from "lucide-react";
 
 export default function AboutPage() {
@@ -34,13 +28,13 @@ export default function AboutPage() {
           <div className="lg:col-span-7">
             <span
               className="font-bold tracking-widest uppercase text-sm mb-4 block"
-              style={{ color: "var(--color-primary)", fontFamily: "var(--font-manrope)" }}
+              style={{ color: "var(--color-primary)", fontFamily: "var(--font-kanit)" }}
             >
               {a.badge}
             </span>
             <h1
               className="text-5xl md:text-7xl font-extrabold tracking-tighter mb-8 leading-[0.9]"
-              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
+              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
             >
               {a.title}{" "}
               <span className="text-gradient">{a.titleGradient}</span>{" "}
@@ -65,7 +59,7 @@ export default function AboutPage() {
                 >
                   <span
                     className="text-3xl font-extrabold"
-                    style={{ color, fontFamily: "var(--font-manrope)" }}
+                    style={{ color, fontFamily: "var(--font-kanit)" }}
                   >
                     {value}
                   </span>
@@ -86,15 +80,16 @@ export default function AboutPage() {
               style={{ backgroundColor: "rgba(192,193,255,0.15)", filter: "blur(80px)" }}
             />
             <div
-              className="relative rounded-xl overflow-hidden border aspect-[4/5] shadow-2xl"
-              style={{ borderColor: "var(--border-strong)" }}
+              className="relative rounded-xl overflow-hidden border shadow-2xl"
+              style={{ borderColor: "var(--border-strong)", aspectRatio: "4/5" }}
             >
-              <div
-                className="w-full h-full flex items-center justify-center text-9xl"
-                style={{ backgroundColor: "var(--color-surface-container-highest)", color: "var(--color-outline-variant)" }}
-              >
-                👤
-              </div>
+              <Image
+                src="/profile.jpg"
+                alt="Supawit Srichompoo"
+                fill
+                className="object-cover"
+                unoptimized
+              />
             </div>
           </div>
         </section>
@@ -112,7 +107,7 @@ export default function AboutPage() {
               />
               <h3
                 className="text-3xl font-bold mb-6"
-                style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
+                style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
               >
                 {a.philosophy_title}
               </h3>
@@ -147,7 +142,7 @@ export default function AboutPage() {
                   <Icon className="w-10 h-10 mb-4" style={{ color: accent }} />
                   <h4
                     className="text-xl font-bold mb-2"
-                    style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
+                    style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
                   >
                     {title}
                   </h4>
@@ -166,7 +161,7 @@ export default function AboutPage() {
             <GraduationCap className="w-8 h-8" style={{ color: "var(--color-primary)" }} />
             <h2
               className="text-3xl font-extrabold tracking-tight"
-              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
+              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
             >
               {a.education_title}
             </h2>
@@ -191,7 +186,7 @@ export default function AboutPage() {
                   <div>
                     <h3
                       className="text-xl font-bold mb-1"
-                      style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
+                      style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
                     >
                       {degree}
                     </h3>
@@ -215,12 +210,12 @@ export default function AboutPage() {
         </section>
 
         {/* Certifications */}
-        <section className="mb-32">
+        {a.certifications_items.length > 0 && <section className="mb-32">
           <div className="flex items-center gap-4 mb-8">
             <Award className="w-8 h-8" style={{ color: "var(--color-secondary)" }} />
             <h2
               className="text-3xl font-extrabold tracking-tight"
-              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
+              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
             >
               {a.certifications_title}
             </h2>
@@ -244,7 +239,7 @@ export default function AboutPage() {
                 <div>
                   <h3
                     className="font-bold"
-                    style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
+                    style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
                   >
                     {name}
                   </h3>
@@ -255,7 +250,7 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-        </section>
+        </section>}
 
         {/* Languages */}
         <section className="mb-32">
@@ -263,7 +258,7 @@ export default function AboutPage() {
             <LanguagesIcon className="w-8 h-8" style={{ color: "var(--color-primary-fixed)" }} />
             <h2
               className="text-3xl font-extrabold tracking-tight"
-              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
+              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
             >
               {a.languages_title}
             </h2>
@@ -286,7 +281,7 @@ export default function AboutPage() {
                   <div>
                     <span
                       className="font-bold"
-                      style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
+                      style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
                     >
                       {language}
                     </span>
@@ -308,7 +303,7 @@ export default function AboutPage() {
           <div className="text-center mb-16">
             <h2
               className="text-4xl font-extrabold mb-4 tracking-tight"
-              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
+              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
             >
               {a.stack_title}
             </h2>
@@ -320,43 +315,21 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-6">
-            {a.stack_items.map(({ label }) => {
-              const iconMap: Record<string, { Icon: React.ElementType; color: string }> = {
-                "Next.js": { Icon: Hexagon, color: "var(--color-primary)" },
-                "Node.js": { Icon: Circle, color: "#16a34a" },
-                "PHP / CodeIgniter": { Icon: Code2, color: "#9333ea" },
-                "React Native": { Icon: Smartphone, color: "#06b6d4" },
-                "MySQL / MSSQL": { Icon: Database, color: "#3b82f6" },
-                "SAP Integration": { Icon: Link2, color: "#3b82f6" },
-                "JWT / RBAC": { Icon: ShieldCheck, color: "#16a34a" },
-                "CI/CD": { Icon: Link2, color: "#06b6d4" },
-              };
-              const { Icon, color } = iconMap[label] || { Icon: Circle, color: "var(--color-on-surface-variant)" };
-              return (
-                <div
-                  key={label}
-                  className="flex items-center gap-3 px-6 py-4 rounded-full"
-                  style={{
-                    backgroundColor: "var(--color-surface-container-lowest)",
-                    border: "1px solid var(--border-subtle)",
-                  }}
-                >
-                  <span
-                    className="w-8 h-8 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: "var(--color-surface-container-highest)" }}
-                  >
-                    <Icon className="w-4 h-4" style={{ color }} />
-                  </span>
-                  <span
-                    className="font-bold"
-                    style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
-                  >
-                    {label}
-                  </span>
-                </div>
-              );
-            })}
+          <div className="flex flex-wrap justify-center gap-4">
+            {a.stack_items.map(({ label }) => (
+              <span
+                key={label}
+                className="px-6 py-3 rounded-full font-bold text-sm"
+                style={{
+                  backgroundColor: "var(--color-surface-container-low)",
+                  border: "1px solid var(--border-subtle)",
+                  color: "var(--color-on-surface)",
+                  fontFamily: "var(--font-kanit)",
+                }}
+              >
+                {label}
+              </span>
+            ))}
           </div>
         </section>
 
@@ -375,7 +348,7 @@ export default function AboutPage() {
           <div className="relative z-10 text-center max-w-2xl mx-auto">
             <h2
               className="text-4xl md:text-5xl font-extrabold mb-8 tracking-tight"
-              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
+              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
             >
               {a.cta_title}
             </h2>
@@ -389,7 +362,7 @@ export default function AboutPage() {
                 style={{
                   backgroundColor: "var(--color-primary)",
                   color: "var(--color-on-primary)",
-                  fontFamily: "var(--font-manrope)",
+                  fontFamily: "var(--font-kanit)",
                 }}
               >
                 {a.cta_primary}
@@ -401,7 +374,7 @@ export default function AboutPage() {
                   backgroundColor: "var(--color-surface-container-high)",
                   color: "var(--color-on-surface)",
                   border: "1px solid var(--border-strong)",
-                  fontFamily: "var(--font-manrope)",
+                  fontFamily: "var(--font-kanit)",
                 }}
               >
                 {a.cta_secondary}

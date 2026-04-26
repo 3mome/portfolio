@@ -1,84 +1,15 @@
 "use client";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLang } from "@/components/LangProvider";
-import {
-  Hexagon,
-  CreditCard,
-  Container,
-  Circle,
-  Cloud,
-  Mountain,
-  Code2,
-  Flame,
-  Globe,
-  FileCode,
-  React,
-  ArrowRight,
-} from "lucide-react";
+import { useReveal } from "@/hooks/useReveal";
 
 export default function ProjectsPage() {
   const { t } = useLang();
   const p = t.projects;
-
-  const projects = [
-    {
-      title: p.p1_title,
-      desc: p.p1_desc,
-      tags: [
-        { icon: Hexagon, label: "Next.js", color: "var(--color-primary)" },
-        { icon: CreditCard, label: "Stripe", color: "var(--color-primary)" },
-      ],
-      link: p.view_details,
-      linkColor: "var(--color-primary)",
-      span: 1,
-    },
-    {
-      title: p.p2_title,
-      desc: p.p2_desc,
-      tags: [
-        { icon: Container, label: "Docker", color: "var(--color-secondary)" },
-        { icon: Circle, label: "Go", color: "var(--color-secondary)" },
-      ],
-      link: p.view_details,
-      linkColor: "var(--color-secondary)",
-      span: 1,
-    },
-    {
-      title: p.p3_title,
-      desc: p.p3_desc,
-      tags: [
-        { icon: Cloud, label: "AWS", color: "var(--color-primary)" },
-        { icon: Mountain, label: "Terraform", color: "var(--color-primary)" },
-      ],
-      link: p.view_details,
-      linkColor: "var(--color-primary)",
-      span: 1,
-    },
-    {
-      title: p.p4_title,
-      desc: p.p4_desc,
-      tags: [
-        { icon: Code2, label: "Python", color: "var(--color-secondary)" },
-        { icon: Flame, label: "PyTorch", color: "var(--color-secondary)" },
-      ],
-      link: p.view_details,
-      linkColor: "var(--color-secondary)",
-      span: 1,
-    },
-    {
-      title: p.p5_title,
-      desc: p.p5_desc,
-      tags: [
-        { icon: Globe, label: "Web3", color: "var(--color-primary)" },
-        { icon: FileCode, label: "Solidity", color: "var(--color-primary)" },
-        { icon: React, label: "React", color: "var(--color-primary)" },
-      ],
-      link: p.explore,
-      linkColor: "var(--color-primary)",
-      span: 2,
-    },
-  ];
+  const header = useReveal();
+  const grid = useReveal(0.05);
 
   return (
     <>
@@ -87,10 +18,14 @@ export default function ProjectsPage() {
         className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto"
         style={{ backgroundColor: "var(--color-background)" }}
       >
-        <header className="mb-20 space-y-4">
+        {/* Header */}
+        <header
+          ref={header.ref}
+          className={`mb-20 space-y-4 reveal ${header.visible ? "visible" : ""}`}
+        >
           <h1
             className="text-5xl md:text-7xl font-extrabold tracking-tighter"
-            style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
+            style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
           >
             {p.title1} <span className="text-gradient">{p.titleGradient}</span>
           </h1>
@@ -102,108 +37,128 @@ export default function ProjectsPage() {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
+        {/* System cards grid */}
+        <div
+          ref={grid.ref}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {p.systems.map((sys, i) => (
             <div
-              key={project.title}
-              className={`group relative rounded-xl overflow-hidden glow-hover transition-all duration-500 flex flex-col ${
-                project.span === 2 ? "lg:col-span-2" : ""
+              key={sys.title}
+              className={`group rounded-2xl overflow-hidden flex flex-col card-hover reveal ${
+                grid.visible ? "visible" : ""
               }`}
-              style={{ backgroundColor: "var(--color-surface-container-low)" }}
+              style={{
+                backgroundColor: "var(--color-surface-container-low)",
+                border: "1px solid var(--border-subtle)",
+                transitionDelay: `${(i % 3) * 80}ms`,
+              }}
             >
-              <div
-                className="h-64 overflow-hidden relative"
-                style={{ backgroundColor: "var(--color-surface-container-high)" }}
-              >
-                <div
-                  className="w-full h-full"
-                  style={{
-                    background:
-                      "radial-gradient(circle at 30% 30%, rgba(192,193,255,0.1), transparent 60%), radial-gradient(circle at 70% 70%, rgba(221,183,255,0.08), transparent 60%)",
-                  }}
+              {/* Image */}
+              <div className="relative h-52 overflow-hidden">
+                <Image
+                  src={sys.image}
+                  alt={sys.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  unoptimized
                 />
+                {/* Gradient overlay */}
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: "linear-gradient(to top, var(--color-surface-container-low) 0%, transparent 60%)",
-                    opacity: 0.6,
+                    background:
+                      "linear-gradient(to top, var(--color-surface-container-low) 0%, rgba(11,19,38,0.35) 60%, transparent 100%)",
                   }}
                 />
+                {/* Category badge */}
+                <span
+                  className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full backdrop-blur-sm"
+                  style={{
+                    backgroundColor: "rgba(11,19,38,0.65)",
+                    color: "var(--color-primary)",
+                    border: "1px solid rgba(192,193,255,0.2)",
+                  }}
+                >
+                  {sys.category}
+                </span>
               </div>
 
-              <div
-                className="p-8 flex flex-col flex-grow"
-                style={{ backgroundColor: "var(--color-surface-container-low)" }}
-              >
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map(({ icon: Icon, label, color }) => (
+              {/* Content */}
+              <div className="p-6 flex flex-col flex-grow">
+                <h3
+                  className="text-xl font-bold mb-2 leading-tight"
+                  style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
+                >
+                  {sys.title}
+                </h3>
+
+                <p
+                  className="text-sm leading-relaxed mb-5 flex-grow"
+                  style={{ color: "var(--color-on-surface-variant)" }}
+                >
+                  {sys.desc}
+                </p>
+
+                {/* Tech tags */}
+                <div className="flex flex-wrap gap-1.5">
+                  {sys.tags.map((tag) => (
                     <span
-                      key={label}
-                      className="px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold flex items-center gap-1.5"
-                      style={{ backgroundColor: "var(--color-surface-container-highest)", color }}
+                      key={tag}
+                      className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                      style={{
+                        backgroundColor: "var(--color-surface-container-highest)",
+                        color: "var(--color-primary)",
+                        border: "1px solid var(--border-subtle)",
+                        fontFamily: "var(--font-kanit)",
+                      }}
                     >
-                      <Icon size={12} strokeWidth={2.5} />
-                      {label}
+                      {tag}
                     </span>
                   ))}
                 </div>
-
-                <h3
-                  className={`font-bold mb-2 ${project.span === 2 ? "text-3xl" : "text-2xl"}`}
-                  style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
-                >
-                  {project.title}
-                </h3>
-                <p
-                  className="text-sm mb-6 flex-grow leading-relaxed"
-                  style={{ color: "var(--color-on-surface-variant)" }}
-                >
-                  {project.desc}
-                </p>
-
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 font-bold text-xs uppercase tracking-widest transition-all hover:gap-4 duration-300"
-                  style={{ color: project.linkColor, fontFamily: "var(--font-manrope)" }}
-                >
-                  <ArrowRight size={14} strokeWidth={2.5} />
-                  {project.link}
-                </a>
               </div>
             </div>
           ))}
         </div>
 
+        {/* CTA */}
         <div
-          className="mt-32 p-12 rounded-xl text-center relative overflow-hidden"
+          className="mt-24 p-12 rounded-2xl text-center relative overflow-hidden"
           style={{
-            background: "linear-gradient(135deg, var(--color-surface-container-low), var(--color-surface-container-highest))",
+            background:
+              "linear-gradient(135deg, var(--color-surface-container-low), var(--color-surface-container-highest))",
             border: "1px solid var(--border-subtle)",
           }}
         >
           <div
-            className="absolute top-0 right-0 w-64 h-64 -mr-32 -mt-32 pointer-events-none"
-            style={{ background: "rgba(192,193,255,0.08)", filter: "blur(100px)" }}
+            className="absolute top-0 right-0 w-72 h-72 -mr-36 -mt-36 pointer-events-none"
+            style={{ background: "rgba(192,193,255,0.06)", filter: "blur(80px)" }}
+          />
+          <div
+            className="absolute bottom-0 left-0 w-72 h-72 -ml-36 -mb-36 pointer-events-none"
+            style={{ background: "rgba(221,183,255,0.05)", filter: "blur(80px)" }}
           />
           <h2
-            className="text-3xl md:text-4xl font-bold mb-6 relative z-10"
-            style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
+            className="text-3xl md:text-4xl font-bold mb-4 relative z-10"
+            style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
           >
             {p.cta_title}
           </h2>
           <p
-            className="mb-10 max-w-lg mx-auto relative z-10"
+            className="mb-8 max-w-lg mx-auto relative z-10"
             style={{ color: "var(--color-on-surface-variant)" }}
           >
             {p.cta_desc}
           </p>
           <a
             href="/contact"
-            className="px-10 py-4 rounded-full font-extrabold uppercase text-sm tracking-widest transition-all hover:shadow-2xl active:scale-95 relative z-10 inline-block"
+            className="px-10 py-4 rounded-full font-extrabold uppercase text-sm tracking-widest transition-all duration-200 hover:scale-105 hover:shadow-2xl active:scale-95 relative z-10 inline-block"
             style={{
-              backgroundColor: "var(--color-primary)",
+              background: "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
               color: "var(--color-on-primary)",
-              fontFamily: "var(--font-manrope)",
+              fontFamily: "var(--font-kanit)",
+              boxShadow: "0 4px 24px rgba(192,193,255,0.15)",
             }}
           >
             {p.cta_btn}

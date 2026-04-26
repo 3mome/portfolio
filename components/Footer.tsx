@@ -1,12 +1,12 @@
 "use client";
-import { useLang } from "./LangProvider";
-import { Linkedin, Github, Twitter, Instagram, Dribbble } from "lucide-react";
+import { useLang } from "@/components/LangProvider";
+import { Globe, Mail, MessageCircle, Link2 } from "lucide-react";
 
 const socialLinks = [
-  { label: "LinkedIn", href: "#", Icon: Linkedin },
-  { label: "GitHub", href: "#", Icon: Github },
-  { label: "Twitter", href: "#", Icon: Twitter },
-  { label: "Dribbble", href: "#", Icon: Dribbble },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/supawit-srichompoo-75aa2b405", Icon: Globe },
+  { label: "GitHub", href: "https://github.com/3mome", Icon: Link2 },
+  { label: "Phone", href: "tel:098-265-7214", Icon: MessageCircle },
+  { label: "Email", href: "mailto:3mome.dev@gmail.com", Icon: Mail },
 ];
 
 export default function Footer() {
@@ -20,13 +20,13 @@ export default function Footer() {
         <div className="flex flex-col gap-2">
           <div
             className="text-lg font-black tracking-tighter"
-            style={{ color: "var(--color-primary)", fontFamily: "var(--font-manrope)" }}
+            style={{ color: "var(--color-primary)", fontFamily: "var(--font-kanit)" }}
           >
             SUPAWIT
           </div>
           <p
             className="text-xs tracking-widest uppercase opacity-60"
-            style={{ color: "var(--color-primary)", fontFamily: "var(--font-inter)" }}
+            style={{ color: "var(--color-primary)", fontFamily: "var(--font-kanit)" }}
           >
             {t.footer.copyright}
           </p>

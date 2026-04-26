@@ -58,9 +58,9 @@
   --color-background: #0b1326;
 
   /* === Typography === */
-  --font-headline: "Manrope", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-label: "Inter", sans-serif;
+  --font-headline: "Kanit", sans-serif;
+  --font-body: "Kanit", sans-serif;
+  --font-label: "Kanit", sans-serif;
 
   /* === Border Radius === */
   --radius: 1rem;
@@ -149,7 +149,7 @@ html.light {
 body {
   background-color: var(--color-background);
   color: var(--color-on-background);
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-kanit), "Kanit", sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -256,4 +256,165 @@ body {
   background: rgba(45, 52, 73, 0.5);
   border-color: var(--border-medium);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================================
+   SCROLL REVEAL — base hidden states + visible transition
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.93);
+  transition:
+    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger delays */
+.delay-75  { transition-delay: 75ms; }
+.delay-150 { transition-delay: 150ms; }
+.delay-225 { transition-delay: 225ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-375 { transition-delay: 375ms; }
+.delay-450 { transition-delay: 450ms; }
+.delay-525 { transition-delay: 525ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-left,
+  .reveal-scale {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================================
+   HERO — staggered line-by-line entrance on load
+   ============================================================ */
+@keyframes heroLine {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-line {
+  opacity: 0;
+  animation: heroLine 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero-line-1 { animation-delay: 0.05s; }
+.hero-line-2 { animation-delay: 0.2s; }
+.hero-line-3 { animation-delay: 0.35s; }
+.hero-line-4 { animation-delay: 0.5s; }
+.hero-line-5 { animation-delay: 0.65s; }
+.hero-line-6 { animation-delay: 0.8s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-line { opacity: 1; animation: none; }
+}
+
+/* ============================================================
+   CARD HOVER — lift + border glow
+   ============================================================ */
+.card-hover {
+  transition:
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.28s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.35),
+    0 0 0 1px var(--border-medium),
+    0 0 32px rgba(192, 193, 255, 0.08);
+}
+
+/* ============================================================
+   NAVBAR SCROLL — more opaque + tighter blur when scrolled
+   ============================================================ */
+.navbar-scrolled {
+  background-color: rgba(11, 19, 38, 0.92) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ============================================================
+   PROFILE GLOW RING
+   ============================================================ */
+@keyframes ringPulse {
+  0%, 100% { box-shadow: 0 0 0 0px rgba(192, 193, 255, 0.0), 0 0 40px rgba(192, 193, 255, 0.08); }
+  50%       { box-shadow: 0 0 0 6px rgba(192, 193, 255, 0.07), 0 0 60px rgba(192, 193, 255, 0.14); }
+}
+.profile-ring {
+  animation: ringPulse 4s ease-in-out infinite;
+}
+
+/* ============================================================
+   TAG POP-IN
+   ============================================================ */
+@keyframes tagPop {
+  from { opacity: 0; transform: scale(0.85) translateY(6px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.tag-pop {
+  opacity: 0;
+  animation: tagPop 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tag-pop { opacity: 1; animation: none; }
+}
+
+/* ============================================================
+   GRADIENT TEXT SHIMMER (badge)
+   ============================================================ */
+@keyframes shimmerText {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.badge-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-secondary),
+    var(--color-primary)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerText 3s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-shimmer { animation: none; background-position: 0% 50%; }
 }

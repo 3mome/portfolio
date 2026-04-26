@@ -2,7 +2,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLang } from "@/components/LangProvider";
-import { Mail, Linkedin, Github, Twitter, CheckCircle, Send } from "lucide-react";
+import { Mail, Phone, Globe, Link2, CheckCircle, Send } from "lucide-react";
 
 export default function ContactPage() {
   const { t } = useLang();
@@ -19,13 +19,13 @@ export default function ContactPage() {
           <div className="mb-16">
             <span
               className="font-bold tracking-[0.2em] uppercase text-xs mb-4 block"
-              style={{ color: "var(--color-primary)", fontFamily: "var(--font-manrope)" }}
+              style={{ color: "var(--color-primary)", fontFamily: "var(--font-kanit)" }}
             >
               {c.badge}
             </span>
             <h1
               className="text-5xl md:text-7xl font-extrabold tracking-tighter leading-[0.9] mb-6"
-              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-manrope)" }}
+              style={{ color: "var(--color-on-surface)", fontFamily: "var(--font-kanit)" }}
             >
               {c.title1} <span className="text-gradient">{c.titleGradient}</span>
             </h1>
@@ -53,7 +53,7 @@ export default function ContactPage() {
                     <label
                       htmlFor={id}
                       className="block text-sm font-bold uppercase tracking-widest mb-2"
-                      style={{ color: "var(--color-on-surface-variant)", fontFamily: "var(--font-manrope)" }}
+                      style={{ color: "var(--color-on-surface-variant)", fontFamily: "var(--font-kanit)" }}
                     >
                       {label}
                     </label>
@@ -74,7 +74,7 @@ export default function ContactPage() {
                   <label
                     htmlFor="message"
                     className="block text-sm font-bold uppercase tracking-widest mb-2"
-                    style={{ color: "var(--color-on-surface-variant)", fontFamily: "var(--font-manrope)" }}
+                    style={{ color: "var(--color-on-surface-variant)", fontFamily: "var(--font-kanit)" }}
                   >
                     {c.label_message}
                   </label>
@@ -96,7 +96,7 @@ export default function ContactPage() {
                   style={{
                     background: "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
                     color: "var(--color-on-primary)",
-                    fontFamily: "var(--font-manrope)",
+                    fontFamily: "var(--font-kanit)",
                   }}
                 >
                   <Send size={18} />
@@ -108,21 +108,25 @@ export default function ContactPage() {
             {/* Contact Info */}
             <div className="space-y-6">
               {[
-                { icon: Mail, label: "Email", value: "supawit.srichompoo@gmail.com" },
-                { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/supawit-srichompoo" },
-                { icon: Github, label: "GitHub", value: "github.com/supawitsrichompoo" },
-                { icon: Twitter, label: "Twitter", value: "twitter.com/supawitsrichompoo" },
-              ].map(({ icon: Icon, label, value }) => (
-                <div
+                { icon: Mail, label: "Email", value: "3mome.dev@gmail.com", href: "mailto:3mome.dev@gmail.com" },
+                { icon: Phone, label: "Phone", value: "098-265-7214", href: "tel:098-265-7214" },
+                { icon: Globe, label: "LinkedIn", value: "linkedin.com/in/supawit-srichompoo-75aa2b405", href: "https://www.linkedin.com/in/supawit-srichompoo-75aa2b405" },
+                { icon: Link2, label: "GitHub", value: "github.com/3mome", href: "https://github.com/3mome" },
+              ].map(({ icon: Icon, label, value, href }) => (
+                <a
                   key={label}
-                  className="p-6 rounded-xl flex items-center gap-4"
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="p-6 rounded-xl flex items-center gap-4 transition-colors"
                   style={{
                     backgroundColor: "var(--color-surface-container-low)",
                     border: "1px solid var(--border-subtle)",
+                    textDecoration: "none",
                   }}
                 >
                   <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center"
+                    className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
                     style={{ backgroundColor: "var(--color-surface-container-high)" }}
                   >
                     <Icon size={20} style={{ color: "var(--color-primary)" }} />
@@ -130,7 +134,7 @@ export default function ContactPage() {
                   <div>
                     <p
                       className="text-xs uppercase tracking-widest font-bold"
-                      style={{ color: "var(--color-on-surface-variant)", fontFamily: "var(--font-manrope)" }}
+                      style={{ color: "var(--color-on-surface-variant)", fontFamily: "var(--font-kanit)" }}
                     >
                       {label}
                     </p>
@@ -138,7 +142,7 @@ export default function ContactPage() {
                       {value}
                     </p>
                   </div>
-                </div>
+                </a>
               ))}
 
               <div
@@ -152,7 +156,7 @@ export default function ContactPage() {
                   <CheckCircle size={18} style={{ color: "var(--color-primary)" }} />
                   <span
                     className="text-sm font-bold uppercase tracking-widest"
-                    style={{ color: "var(--color-primary)", fontFamily: "var(--font-manrope)" }}
+                    style={{ color: "var(--color-primary)", fontFamily: "var(--font-kanit)" }}
                   >
                     {c.available_badge}
                   </span>

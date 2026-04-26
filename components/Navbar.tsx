@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTheme } from "./ThemeProvider";
-import { useLang } from "./LangProvider";
+import { useEffect, useState } from "react";
+import { useTheme } from "@/components/ThemeProvider";
+import { useLang } from "@/components/LangProvider";
 import { Download } from "lucide-react";
 
 const linkKeys = [
@@ -17,17 +18,27 @@ export default function Navbar() {
   const pathname = usePathname();
   const { theme, toggle } = useTheme();
   const { locale, t, toggle: toggleLang } = useLang();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <nav
-      className="fixed top-0 w-full z-50 backdrop-blur-xl shadow-2xl shadow-black/40"
-      style={{ backgroundColor: "var(--nav-bg)" }}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? "navbar-scrolled shadow-lg shadow-black/30" : "backdrop-blur-md"
+      }`}
+      style={{ backgroundColor: scrolled ? undefined : "var(--nav-bg)" }}
     >
       <div className="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
         <Link
           href="/"
           className="text-2xl font-black tracking-tighter"
-          style={{ color: "var(--color-primary)", fontFamily: "var(--font-manrope)" }}
+          style={{ color: "var(--color-primary)", fontFamily: "var(--font-kanit)" }}
         >
           SUPAWIT
         </Link>
@@ -41,7 +52,7 @@ export default function Navbar() {
                 href={href}
                 className="font-bold uppercase text-sm tracking-tighter transition-colors"
                 style={{
-                  fontFamily: "var(--font-manrope)",
+                  fontFamily: "var(--font-kanit)",
                   color: active ? "var(--color-primary)" : "var(--color-outline-variant)",
                   borderBottom: active ? "2px solid var(--color-primary)" : "none",
                   paddingBottom: active ? "4px" : undefined,
@@ -70,7 +81,7 @@ export default function Navbar() {
             style={{
               background: "var(--color-surface-container)",
               color: "var(--color-primary)",
-              fontFamily: "var(--font-manrope)",
+              fontFamily: "var(--font-kanit)",
               border: "1px solid var(--border-subtle)",
             }}
           >
@@ -110,11 +121,13 @@ export default function Navbar() {
 
           <a
             href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-5 py-2 rounded-full font-bold text-sm tracking-wide uppercase transition-all hover:scale-105 active:scale-95 inline-flex items-center gap-2"
             style={{
               background: "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
               color: "var(--color-on-primary)",
-              fontFamily: "var(--font-manrope)",
+              fontFamily: "var(--font-kanit)",
             }}
           >
             <Download size={16} />
