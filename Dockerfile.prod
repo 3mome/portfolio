@@ -1,0 +1,43 @@
+FROM node:20-alpine
+
+# Create app directory
+WORKDIR /app
+
+# Install dependencies first (layer caching)
+COPY package.json ./
+RUN npm install
+
+# Copy rest of the code
+COPY . .
+
+# รับ build args
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
+# Build the Next.js app
+RUN npm run build
+
+# Use a minimal base image for runtime
+FROM node:20-alpine AS runner
+
+# Create non-root user
+RUN addgroup -S nodeapp && adduser -S nodeapp -G nodeapp
+# Set the working directory
+WORKDIR /app
+
+# Copy only necessary files
+COPY --from=0 /app/.next .next
+COPY --from=0 /app/public ./public
+COPY --from=0 /app/package.json ./package.json
+COPY --from=0 /app/node_modules ./node_modules
+
+# Change ownership to non-root user
+RUN chown -R nodeapp:nodeapp /app
+
+# Switch to non-root user
+USER nodeapp
+
+EXPOSE 3002
+ENV PORT 3002
+
+CMD ["npm", "start"]
